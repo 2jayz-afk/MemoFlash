@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemoFlash | Digital Flashcards</title>
+    <link rel="stylesheet" href="style.css">
+  
+</head>
+<body>
+
+    <div class="app-container">
+
+        
+        <aside class="sidebar">
+            <h1 class="logo">MemoFlash</h1>
+            <p class="tagline">Learn. Remember. Succeed.</p>
+
+            <nav class="navigation">
+                <button class="nav-btn active" data-page="dashboard">
+                    Dashboard
+                </button>
+                <button class="nav-btn" data-page="flashcards">
+                    My Flashcards
+                </button>
+                <button class="nav-btn" data-page="study">
+                    Study Mode
+                </button>
+                <button class="nav-btn" data-page="quiz">
+                    Quiz Mode
+                </button>
+                <button class="nav-btn" data-page="progress">
+                    Learning Progress
+                </button>
+            </nav>
+        </aside>
+
+   
+        <main class="main-content">
+
+           
+            <section id="dashboard" class="page active">
+                <h2>Dashboard</h2>
+                <p>Welcome to MemoFlash! Ready to learn something new?</p>
+
+                <div class="stats">
+                    <div class="stat-card">
+                        <h3 id="totalFlashcards">0</h3>
+                        <p>Total Flashcards</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3 id="totalSubjects">0</h3>
+                        <p>Total Subjects</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <h3 id="totalQuizzes">0</h3>
+                        <p>Quizzes Completed</p>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section id="flashcards" class="page">
+                <h2>My Flashcards</h2>
+                <p>Create and organize your study materials.</p>
+
+                <div class="flashcard-controls">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search questions..."
+                    >
+
+                    <select id="subjectFilter">
+                        <option value="all">All Subjects</option>
+                    </select>
+
+                    <button id="addFlashcardBtn">+ Add Flashcard</button>
+                </div>
+
+                <form id="flashcardForm" class="flashcard-form" hidden>
+                    <h3 id="formTitle">Create Flashcard</h3>
+
+                    <label for="questionInput">Question</label>
+                    <input
+                        type="text"
+                        id="questionInput"
+                        placeholder="Enter your question"
+                        required
+                    >
+
+                    <label for="answerInput">Answer</label>
+                    <textarea
+                        id="answerInput"
+                        placeholder="Enter the answer"
+                        required
+                    ></textarea>
+
+                    <label for="subjectInput">Subject</label>
+                    <input
+                        type="text"
+                        id="subjectInput"
+                        placeholder="Enter subject"
+                        required
+                    >
+
+                    <div class="form-buttons">
+                        <button type="submit" id="saveFlashcardBtn">
+                            Save Flashcard
+                        </button>
+                        <button type="button" id="cancelFormBtn">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+
+                <div id="flashcardList" class="flashcard-list">
+                    <p>No flashcards added yet.</p>
+                </div>
+            </section>
+
+        
+            <section id="study" class="page">
+    <h1>Study Mode</h1>
+    <p>Review your flashcards by subject.</p>
+
+    <div class="study-controls">
+        <label for="studySubject">Choose Subject:</label>
+        <select id="studySubject">
+            <option value="all">All Subjects</option>
+        </select>
+    </div>
+
+    <div id="studyCard" class="study-card">
+        <h2 id="studyText">Select a subject to start studying.</h2>
+    </div>
+
+    <div class="study-buttons">
+        <button id="previousCardBtn">Previous</button>
+        <button id="flipCardBtn">Flip Card</button>
+        <button id="nextCardBtn">Next</button>
+    </div>
+
+    <p id="studyCounter">0 of 0</p>
+</section>
+
+            
+            <section id="quiz" class="page">
+                <h2>Quiz Mode</h2>
+                <p>Answer questions and check your knowledge.</p>
+
+                <label for="quizSubject">Choose a subject:</label>
+                <select id="quizSubject">
+                    <option value="all">All Subjects</option>
+                </select>
+
+                <button id="startQuizBtn">Start Quiz</button>
+
+                <div id="quizContainer"></div>
+            </section>
+
+           
+            <section id="progress" class="page">
+                <h2>Learning Progress</h2>
+                <p>Review your previous quiz results.</p>
+
+                <div id="progressContainer">
+                    <p>No quiz results yet.</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
