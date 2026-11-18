@@ -387,34 +387,43 @@ function filterStudyCards() {
     displayStudyCard();
 }
 
+
+
 function displayStudyCard() {
-    const studyText = document.getElementById("studyText");
+    const studyCard = document.getElementById("studyCard");
     const studyCounter = document.getElementById("studyCounter");
 
     if (studyFlashcards.length === 0) {
-        studyText.textContent =
-            "No flashcards available for this subject.";
-
+        studyCard.innerHTML = "<p>No flashcards available.</p>";
         studyCounter.textContent = "0 of 0";
         return;
     }
 
     const card = studyFlashcards[currentStudyIndex];
 
-    studyText.textContent = isAnswerVisible
-        ? card.answer
-        : card.question;
+    studyCard.innerHTML = `
+        <div class="flashcard-inner">
+            <div class="flashcard-front">
+                <h3>QUESTION</h3>
+                <p>${card.question}</p>
+                <small>Click to reveal answer</small>
+            </div>
+
+            <div class="flashcard-back">
+                <h3>ANSWER</h3>
+                <p>${card.answer}</p>
+                <small>Click to see question</small>
+            </div>
+        </div>
+    `;
+
+    studyCard.classList.remove("flipped");
+    studyCard.onclick = flipCard;
 
     studyCounter.textContent =
         `${currentStudyIndex + 1} of ${studyFlashcards.length}`;
 }
 
-function flipCard() {
-    if (studyFlashcards.length === 0) return;
-
-    isAnswerVisible = !isAnswerVisible;
-    displayStudyCard();
-}
 
 function nextCard() {
     if (studyFlashcards.length === 0) return;
@@ -522,17 +531,19 @@ function displayQuizQuestion() {
         ...shuffleArray(otherAnswers).slice(0, 3)
     ]);
 
-    options.forEach(option => {
-        const optionButton = document.createElement("button");
-        optionButton.className = "quiz-option";
-        optionButton.textContent = option;
+   options.forEach((option, index) => {
+    const optionButton = document.createElement("button");
+    const letter = String.fromCharCode(65 + index);
 
-        optionButton.addEventListener("click", () => {
-            checkQuizAnswer(option, card.answer, optionButton);
-        });
+    optionButton.className = "quiz-option";
+    optionButton.textContent = `${letter}. ${option}`;
 
-        optionsContainer.appendChild(optionButton);
+    optionButton.addEventListener("click", () => {
+        checkQuizAnswer(option, card.answer, optionButton);
     });
+
+    optionsContainer.appendChild(optionButton);
+});
 
     const feedback = document.createElement("p");
     feedback.id = "quizFeedback";
@@ -572,10 +583,11 @@ function checkQuizAnswer(selectedAnswer, correctAnswer, selectedButton) {
     }
 
     const nextButton = document.createElement("button");
-    nextButton.textContent =
-        currentQuizIndex === currentQuizQuestions.length - 1
-            ? "Finish Quiz"
-            : "Next Question";
+nextButton.className = "quiz-action-btn";
+nextButton.textContent =
+    currentQuizIndex === currentQuizQuestions.length - 1
+        ? "Finish Quiz"
+        : "Next Question";
 
     nextButton.addEventListener("click", () => {
         currentQuizIndex++;
@@ -641,8 +653,9 @@ message.textContent =
                 : "Bawi Next time! Review more!";
 
     const retryButton = document.createElement("button");
-    retryButton.textContent = "Try Again";
-    retryButton.addEventListener("click", startQuiz);
+retryButton.className = "quiz-action-btn";
+retryButton.textContent = "Try Again";
+retryButton.addEventListener("click", startQuiz);
 
     quizContainer.append(
         resultTitle,
@@ -741,3 +754,12 @@ function displayProgress() {
     progressContainer.append(summary, historyTitle, history);
 }
 
+
+function flipCard() {
+    if (studyFlashcards.length === 0) return;
+
+    const studyCard = document.getElementById("studyCard");
+
+    studyCard.classList.toggle("flipped");
+    isAnswerVisible = !isAnswerVisible;
+}

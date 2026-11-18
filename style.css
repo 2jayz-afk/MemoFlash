@@ -690,3 +690,122 @@ button {
     text-align: center;
     margin-top: 15px;
 }
+
+/* buttons in quiz mode */
+
+.quiz-action-btn {
+    background: #6579e8;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.quiz-action-btn:hover {
+    background: #5065d2;
+    transform: translateY(-2px);
+}
+
+.quiz-action-btn:disabled {
+    background: #aab4ed;
+    color: white;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* animation flip */
+
+
+.flashcard {
+    perspective: 1000px;
+    cursor: pointer;
+    min-height: 250px;
+}
+
+.flashcard-inner {
+    position: relative;
+    width: 100%;
+    min-height: 250px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+}
+
+.flashcard.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+    position: absolute;
+    width: 100%;
+    min-height: 250px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    border-radius: 16px;
+    box-sizing: border-box;
+}
+
+.flashcard-front {
+    transform: rotateY(0deg);
+}
+
+.flashcard-back {
+    transform: rotateY(180deg);
+}
+
+
+#studyCard {
+    position: relative;
+    perspective: 1000px;
+    cursor: pointer;
+    min-height: 400px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#studyCard .flashcard-inner {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+    transform-style: preserve-3d;
+    transition: transform 0.7s ease;
+}
+
+#studyCard.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+}
+
+#studyCard .flashcard-front,
+#studyCard .flashcard-back {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+#studyCard .flashcard-front {
+    transform: rotateY(0deg);
+}
+
+#studyCard .flashcard-back {
+    transform: rotateY(180deg);
+}
+
